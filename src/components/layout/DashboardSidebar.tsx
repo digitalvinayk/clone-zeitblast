@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
+import { LogoIcon } from '@/components/ui/Logo';
 import {
   FiHome,
   FiUsers,
@@ -43,20 +44,24 @@ export default function DashboardSidebar() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-primary-dark text-white">
+    <div className="flex flex-col h-full bg-gradient-to-b from-brand-blue via-brand-blue to-brand-teal text-white">
       {/* Logo */}
-      <div className="p-6 border-b border-white border-opacity-10">
-        <Link href="/dashboard">
-          <div className="text-2xl font-bold">
-            <span className="text-primary-green">Zeit</span>blast
+      <div className="p-6 border-b border-white border-opacity-20">
+        <Link href="/dashboard" className="flex items-center gap-3 group">
+          <LogoIcon size="md" className="transition-transform group-hover:scale-110" />
+          <div className="flex flex-col">
+            <span className="text-xl font-bold tracking-tight">
+              Intello<span className="text-accent-green">Blast</span>
+            </span>
+            <span className="text-xs text-white/70">Dashboard</span>
           </div>
         </Link>
       </div>
 
       {/* User Info */}
-      <div className="p-6 border-b border-white border-opacity-10">
+      <div className="p-6 border-b border-white border-opacity-20">
         <div className="flex items-center">
-          <div className="w-10 h-10 bg-primary-green rounded-full flex items-center justify-center font-semibold">
+          <div className="w-10 h-10 bg-gradient-to-br from-brand-emerald to-accent-green rounded-full flex items-center justify-center font-semibold shadow-lg">
             {session?.user?.name?.charAt(0).toUpperCase() || 'U'}
           </div>
           <div className="ml-3">
