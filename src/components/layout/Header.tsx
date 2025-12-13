@@ -124,12 +124,16 @@ const Header: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              Login
-            </Button>
-            <Button variant="primary" size="sm">
-              Request Demo
-            </Button>
+            <Link href="/auth/signin">
+              <Button variant="outline" size="sm">
+                Login
+              </Button>
+            </Link>
+            <Link href="/auth/signup">
+              <Button variant="primary" size="sm">
+                Get Started
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -189,12 +193,16 @@ const Header: React.FC = () => {
               </div>
             ))}
             <div className="mt-4 space-y-2">
-              <Button variant="outline" size="sm" fullWidth>
-                Login
-              </Button>
-              <Button variant="primary" size="sm" fullWidth>
-                Request Demo
-              </Button>
+              <Link href="/auth/signin" className="block">
+                <Button variant="outline" size="sm" fullWidth onClick={() => setMobileMenuOpen(false)}>
+                  Login
+                </Button>
+              </Link>
+              <Link href="/auth/signup" className="block">
+                <Button variant="primary" size="sm" fullWidth onClick={() => setMobileMenuOpen(false)}>
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         )}
