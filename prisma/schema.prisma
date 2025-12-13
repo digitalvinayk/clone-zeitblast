@@ -1,0 +1,525 @@
+// Zeitblast SMS Marketing Platform - Database Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ============================================
+// AUTHENTICATION & USERS
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  password      String?
+  image         String?
+  phone         String?
+  role          UserRole  @default(USER)
+
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  assignedContacts Contact[]
+  assignedConversations Conversation[]
+  campaignsCreated Campaign[]
+  messages         Message[]
+  accounts         Account[]
+  sessions         Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? 
+  access_token      String? 
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? 
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+enum UserRole {
+  ADMIN
+  USER
+  AGENT
+}
+
+// ============================================
+// ORGANIZATION (Multi-tenant)
+// ============================================
+
+model Organization {
+  id               String   @id @default(cuid())
+  name             String
+  planId           String?
+  plan             Plan?    @relation(fields: [planId], references: [id])
+
+  // 10DLC Compliance
+  dlcBrandId       String?
+  dlcCampaignId    String?
+  complianceStatus ComplianceStatus @default(PENDING)
+
+  // Settings
+  settings         Json?
+  timezone         String   @default("America/New_York")
+
+  users            User[]
+  phoneNumbers     PhoneNumber[]
+  contacts         Contact[]
+  properties       Property[]
+  campaigns        Campaign[]
+  messages         Message[]
+  conversations    Conversation[]
+  dncList          DncEntry[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([planId])
+}
+
+model Plan {
+  id                String   @id @default(cuid())
+  name              String
+  price             Int      // in cents
+  messagesIncluded  Int
+  features          Json
+  organizations     Organization[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ComplianceStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+// ============================================
+// PHONE NUMBERS
+// ============================================
+
+model PhoneNumber {
+  id              String   @id @default(cuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  number          String   @unique
+  areaCode        String
+  provider        SmsProvider
+  providerId      String?
+
+  status          PhoneStatus @default(ACTIVE)
+  healthScore     Int      @default(100)
+  messagesSent    Int      @default(0)
+  messagesToday   Int      @default(0)
+
+  lastUsedAt      DateTime?
+  flaggedAt       DateTime?
+
+  conversations   Conversation[]
+  messagesSentFrom Message[] @relation("SentFrom")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([number])
+  @@index([status])
+}
+
+enum SmsProvider {
+  TWILIO
+  TELNYX
+  BANDWIDTH
+  SINCH
+}
+
+enum PhoneStatus {
+  ACTIVE
+  FLAGGED
+  BLOCKED
+  RELEASED
+}
+
+// ============================================
+// CONTACTS & PROPERTIES
+// ============================================
+
+model Contact {
+  id              String   @id @default(cuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  firstName       String?
+  lastName        String?
+  primaryPhone    String
+  phones          Json?    // Array of phone objects
+  emails          Json?    // Array of emails
+  mailingAddress  Json?
+
+  status          ContactStatus @default(NEW)
+  tags            Json?    // Array of tags
+  source          String?
+
+  assignedToId    String?
+  assignedTo      User?    @relation(fields: [assignedToId], references: [id], onDelete: SetNull)
+
+  dncStatus       Boolean  @default(false)
+  litigatorStatus Boolean  @default(false)
+
+  lastContactedAt DateTime?
+  customFields    Json?
+
+  properties      Property[]
+  conversations   Conversation[]
+  messages        Message[]
+  campaignContacts CampaignContact[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([primaryPhone])
+  @@index([status])
+  @@index([assignedToId])
+}
+
+enum ContactStatus {
+  NEW
+  CONTACTED
+  INTERESTED
+  HOT
+  UNDER_CONTRACT
+  CLOSED
+  DEAD
+}
+
+model Property {
+  id              String   @id @default(cuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  ownerContactId  String
+  ownerContact    Contact  @relation(fields: [ownerContactId], references: [id], onDelete: Cascade)
+
+  address         String
+  city            String
+  state           String
+  zip             String
+
+  propertyType    String?
+  bedrooms        Int?
+  bathrooms       Float?
+  sqft            Int?
+  lotSize         Int?
+  yearBuilt       Int?
+
+  estimatedValue  Float?
+  equityPercent   Float?
+  motivationScore Int?
+  motivationIndicators Json?    // Array of motivation indicators
+
+  lastSaleDate    DateTime?
+  lastSalePrice   Float?
+
+  propertyData    Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([ownerContactId])
+}
+
+// ============================================
+// CAMPAIGNS
+// ============================================
+
+model Campaign {
+  id              String   @id @default(cuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  name            String
+  type            CampaignType
+  status          CampaignStatus @default(DRAFT)
+
+  messageTemplate String   
+  settings        Json?
+
+  scheduledAt     DateTime?
+  startedAt       DateTime?
+  completedAt     DateTime?
+
+  createdById     String
+  createdBy       User     @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  steps           CampaignStep[]
+  contacts        CampaignContact[]
+  messages        Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([createdById])
+}
+
+enum CampaignType {
+  BLAST
+  DRIP
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+model CampaignStep {
+  id              String   @id @default(cuid())
+  campaignId      String
+  campaign        Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  stepOrder       Int
+  delayDays       Int      @default(0)
+  delayHours      Int      @default(0)
+
+  messageTemplate String   
+  conditions      Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([campaignId])
+}
+
+model CampaignContact {
+  id              String   @id @default(cuid())
+  campaignId      String
+  campaign        Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  contactId       String
+  contact         Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  status          CampaignContactStatus @default(PENDING)
+  currentStep     Int      @default(0)
+  nextSendAt      DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([campaignId, contactId])
+  @@index([campaignId])
+  @@index([contactId])
+  @@index([status])
+}
+
+enum CampaignContactStatus {
+  PENDING
+  ACTIVE
+  RESPONDED
+  COMPLETED
+  OPTED_OUT
+  FAILED
+}
+
+// ============================================
+// MESSAGES & CONVERSATIONS
+// ============================================
+
+model Message {
+  id              String   @id @default(cuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  contactId       String?
+  contact         Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  conversationId  String?
+  conversation    Conversation? @relation(fields: [conversationId], references: [id], onDelete: SetNull)
+
+  campaignId      String?
+  campaign        Campaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+
+  fromNumber      String
+  fromNumberId    String?
+  fromPhone       PhoneNumber? @relation("SentFrom", fields: [fromNumberId], references: [id], onDelete: SetNull)
+
+  toNumber        String
+  direction       MessageDirection
+  content         String   
+
+  status          MessageStatus @default(QUEUED)
+  provider        SmsProvider?
+  providerMessageId String?
+
+  errorCode       String?
+  errorMessage    String?
+
+  userId          String?
+  user            User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  sentAt          DateTime?
+  deliveredAt     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([contactId])
+  @@index([conversationId])
+  @@index([campaignId])
+  @@index([status])
+  @@index([direction])
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum MessageStatus {
+  QUEUED
+  SENDING
+  SENT
+  DELIVERED
+  FAILED
+  RECEIVED
+}
+
+model Conversation {
+  id              String   @id @default(cuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  contactId       String
+  contact         Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  phoneNumberId   String
+  phoneNumber     PhoneNumber @relation(fields: [phoneNumberId], references: [id], onDelete: Cascade)
+
+  status          ConversationStatus @default(ACTIVE)
+
+  assignedToId    String?
+  assignedTo      User?    @relation(fields: [assignedToId], references: [id], onDelete: SetNull)
+
+  lastMessageAt   DateTime?
+  lastMessagePreview String? 
+  unreadCount     Int      @default(0)
+
+  messages        Message[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([contactId, phoneNumberId])
+  @@index([organizationId])
+  @@index([contactId])
+  @@index([assignedToId])
+  @@index([status])
+}
+
+enum ConversationStatus {
+  ACTIVE
+  ARCHIVED
+  SNOOZED
+  CLOSED
+}
+
+// ============================================
+// DNC (Do Not Call) LIST
+// ============================================
+
+model DncEntry {
+  id              String   @id @default(cuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  phoneNumber     String
+  reason          DncReason
+  source          String?
+
+  addedAt DateTime @default(now())
+
+  @@unique([organizationId, phoneNumber])
+  @@index([organizationId])
+  @@index([phoneNumber])
+}
+
+enum DncReason {
+  OPT_OUT
+  FEDERAL_DNC
+  STATE_DNC
+  LITIGATOR
+  MANUAL
+  CARRIER_BLOCK
+}
+
+// ============================================
+// ANALYTICS
+// ============================================
+
+model AnalyticsEvent {
+  id              String   @id @default(cuid())
+  organizationId  String?
+  eventType       String
+  eventData       Json?
+
+  userId          String?
+  campaignId      String?
+  contactId       String?
+  messageId       String?
+
+  createdAt DateTime @default(now())
+
+  @@index([organizationId])
+  @@index([eventType])
+  @@index([createdAt])
+}
