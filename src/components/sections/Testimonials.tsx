@@ -18,7 +18,7 @@ const testimonials: Testimonial[] = [
     name: 'Sarah Johnson',
     role: 'Real Estate Investor',
     company: 'Johnson Properties',
-    content: 'Zeitblast has transformed my lead generation process. I\'m closing 3x more deals than before with less effort. The automation features are a game-changer!',
+    content: 'Intello Blast has transformed my lead generation process. I\'m closing 3x more deals than before with less effort. The automation features are a game-changer!',
     rating: 5,
   },
   {
@@ -32,14 +32,14 @@ const testimonials: Testimonial[] = [
     name: 'Jennifer Martinez',
     role: 'Team Leader',
     company: 'Martinez Real Estate Team',
-    content: 'Managing multiple markets used to be a nightmare. Zeitblast makes it effortless. The CRM integration saved us countless hours of manual data entry.',
+    content: 'Managing multiple markets used to be a nightmare. Intello Blast makes it effortless. The CRM integration saved us countless hours of manual data entry.',
     rating: 5,
   },
   {
     name: 'David Thompson',
     role: 'Real Estate Agent',
     company: 'Thompson Realty',
-    content: 'I love how easy it is to stay compliant. No more worrying about regulations or carrier restrictions. Zeitblast handles everything automatically so I can focus on closing deals.',
+    content: 'I love how easy it is to stay compliant. No more worrying about regulations or carrier restrictions. Intello Blast handles everything automatically so I can focus on closing deals.',
     rating: 5,
   },
   {
@@ -80,7 +80,7 @@ const Testimonials: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            See what real estate professionals are saying about Zeitblast
+            See what real estate professionals are saying about Intello Blast
           </motion.p>
         </div>
 

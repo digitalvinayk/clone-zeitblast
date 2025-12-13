@@ -13,12 +13,12 @@ interface FAQItem {
 
 const faqItems: FAQItem[] = [
   {
-    question: 'What is Zeitblast and how does it work?',
-    answer: 'Zeitblast is a powerful SMS marketing platform designed specifically for real estate professionals. It allows you to send automated text message campaigns to prospects, manage multiple markets, track responses, and integrate with your existing CRM to streamline your lead generation process.',
+    question: 'What is Intello Blast and how does it work?',
+    answer: 'Intello Blast is a powerful SMS marketing platform designed specifically for real estate professionals. It allows you to send automated text message campaigns to prospects, manage multiple markets, track responses, and integrate with your existing CRM to streamline your lead generation process.',
   },
   {
-    question: 'Is Zeitblast compliant with messaging regulations?',
-    answer: 'Yes! Zeitblast is fully compliant with A2P 10DLC regulations and all carrier requirements. We automatically handle compliance checks, number validation, and ensure all your campaigns meet industry standards so you can focus on closing deals.',
+    question: 'Is Intello Blast compliant with messaging regulations?',
+    answer: 'Yes! Intello Blast is fully compliant with A2P 10DLC regulations and all carrier requirements. We automatically handle compliance checks, number validation, and ensure all your campaigns meet industry standards so you can focus on closing deals.',
   },
   {
     question: 'How quickly can I get started?',
@@ -29,8 +29,8 @@ const faqItems: FAQItem[] = [
     answer: 'Our customers typically see response rates of 10-30%, which is significantly higher than traditional cold calling (1-3%) or email marketing (2-5%). The personal nature of SMS combined with our deliverability optimization leads to exceptional engagement.',
   },
   {
-    question: 'Can I integrate Zeitblast with my existing CRM?',
-    answer: 'Absolutely! Zeitblast integrates seamlessly with popular CRMs including Salesforce, HubSpot, Podio, and many others. You can automatically push leads into your CRM and sync contact information bidirectionally.',
+    question: 'Can I integrate Intello Blast with my existing CRM?',
+    answer: 'Absolutely! Intello Blast integrates seamlessly with popular CRMs including Salesforce, HubSpot, Podio, and many others. You can automatically push leads into your CRM and sync contact information bidirectionally.',
   },
   {
     question: 'What support do you offer?',
@@ -74,7 +74,7 @@ const FAQ: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Everything you need to know about Zeitblast and SMS marketing for real estate
+            Everything you need to know about Intello Blast and SMS marketing for real estate
           </motion.p>
         </div>
 

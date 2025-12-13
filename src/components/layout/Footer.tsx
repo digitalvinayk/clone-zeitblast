@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Container } from '@/components/ui';
+import Logo from '@/components/ui/Logo';
 import {
   FaFacebookF,
   FaTwitter,
@@ -94,13 +95,11 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Logo and Description */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center mb-4">
-              <div className="text-2xl font-bold">
-                <span className="text-primary-green">Zeit</span>blast
-              </div>
-            </Link>
+            <div className="mb-4">
+              <Logo variant="white" size="md" />
+            </div>
             <p className="text-gray-300 mb-6 max-w-sm">
-              Real estate SMS marketing platform to generate leads and close more deals through powerful text message campaigns.
+              Intelligent SMS marketing platform to generate leads and close more deals through powerful text message campaigns.
             </p>
 
             {/* Social Media Links */}
@@ -170,7 +169,7 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white border-opacity-10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-300 text-sm">
-            © {currentYear} Zeitblast. All rights reserved.
+            © {currentYear} Intello Blast. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link

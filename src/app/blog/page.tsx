@@ -25,7 +25,7 @@ const blogPosts: BlogPost[] = [
   },
   {
     title: 'How to Stay Compliant with A2P 10DLC Regulations',
-    excerpt: 'Everything you need to know about A2P 10DLC compliance and how Zeitblast helps you stay on the right side of carrier regulations.',
+    excerpt: 'Everything you need to know about A2P 10DLC compliance and how Intello Blast helps you stay on the right side of carrier regulations.',
     date: 'December 8, 2025',
     category: 'Compliance',
     readTime: '7 min read',
@@ -56,8 +56,8 @@ const blogPosts: BlogPost[] = [
     slug: 'write-sms-messages-that-convert',
   },
   {
-    title: 'Integrating Zeitblast with Your CRM: A Step-by-Step Guide',
-    excerpt: 'Follow our detailed guide to seamlessly integrate Zeitblast with your existing CRM and automate your lead management.',
+    title: 'Integrating Intello Blast with Your CRM: A Step-by-Step Guide',
+    excerpt: 'Follow our detailed guide to seamlessly integrate Intello Blast with your existing CRM and automate your lead management.',
     date: 'November 25, 2025',
     category: 'Tutorial',
     readTime: '12 min read',
@@ -78,7 +78,7 @@ export default function BlogPage() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Zeitblast <span className="text-yellow-300">Blog</span>
+              Intello Blast <span className="text-yellow-300">Blog</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-100">
               Tips, strategies, and insights to help you master SMS marketing for real estate

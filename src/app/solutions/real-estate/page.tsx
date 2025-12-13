@@ -68,7 +68,7 @@ export default function RealEstateSolutionPage() {
       <section className="py-20 bg-white">
         <Container>
           <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-12 text-center">
-            Why Real Estate Professionals Choose Zeitblast
+            Why Real Estate Professionals Choose Intello Blast
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -194,7 +194,7 @@ export default function RealEstateSolutionPage() {
               Ready to Transform Your Real Estate Business?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Join thousands of real estate professionals who are generating more leads and closing more deals with Zeitblast
+              Join thousands of real estate professionals who are generating more leads and closing more deals with Intello Blast
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="white" size="lg">

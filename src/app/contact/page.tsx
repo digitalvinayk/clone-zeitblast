@@ -236,7 +236,7 @@ export default function ContactPage() {
                 },
                 {
                   q: 'Do you offer demos?',
-                  a: 'Yes! Schedule a personalized demo with our team to see Zeitblast in action.',
+                  a: 'Yes! Schedule a personalized demo with our team to see Intello Blast in action.',
                 },
                 {
                   q: 'What kind of support do you provide?',
@@ -281,7 +281,7 @@ export default function ContactPage() {
               Prefer to Talk?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Schedule a call with our team to discuss how Zeitblast can help grow your business
+              Schedule a call with our team to discuss how Intello Blast can help grow your business
             </p>
             <Button variant="white" size="lg">
               Schedule a Call

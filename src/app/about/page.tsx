@@ -18,7 +18,7 @@ export default function AboutPage() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              About <span className="text-yellow-300">Zeitblast</span>
+              About <span className="text-yellow-300">Intello Blast</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-100">
               Empowering real estate professionals with cutting-edge SMS marketing technology
@@ -42,7 +42,7 @@ export default function AboutPage() {
                 Our Mission
               </h2>
               <p className="text-xl text-gray-600 leading-relaxed">
-                At Zeitblast, we believe that every real estate professional deserves access to powerful,
+                At Intello Blast, we believe that every real estate professional deserves access to powerful,
                 compliant, and effective SMS marketing tools. Our mission is to democratize lead generation
                 and help you close more deals through intelligent automation and world-class support.
               </p>
@@ -125,7 +125,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
                 <p>
-                  Zeitblast was born out of frustration with existing SMS marketing platforms that were
+                  Intello Blast was born out of frustration with existing SMS marketing platforms that were
                   either too complex, too expensive, or simply didn't deliver results. Our founders,
                   experienced real estate investors themselves, knew there had to be a better way.
                 </p>
@@ -135,7 +135,7 @@ export default function AboutPage() {
                   finding a platform that balanced compliance, deliverability, ease of use, and affordability.
                 </p>
                 <p>
-                  That's when Zeitblast was created. Built by real estate professionals for real estate
+                  That's when Intello Blast was created. Built by real estate professionals for real estate
                   professionals, our platform combines cutting-edge technology with deep industry expertise
                   to deliver unmatched results.
                 </p>
@@ -159,7 +159,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-              Zeitblast by the Numbers
+              Intello Blast by the Numbers
             </h2>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -203,7 +203,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-xl text-gray-600 mb-8">
               Become part of a thriving community of real estate professionals who are transforming
-              their businesses with Zeitblast.
+              their businesses with Intello Blast.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="primary" size="lg">

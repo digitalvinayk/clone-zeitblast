@@ -73,7 +73,7 @@ const pricingPlans: PricingPlan[] = [
   },
   {
     name: 'Jumpstart JV + Vault',
-    price: '$495',
+    price: '$997',
     period: '/month',
     description: 'Done-for-you service with 50/50 deal split',
     features: [
@@ -359,7 +359,7 @@ export default function PricingPage() {
               Ready to Get Started?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Join thousands of real estate professionals who trust Zeitblast for their SMS marketing
+              Join thousands of real estate professionals who trust Intello Blast for their SMS marketing
             </p>
             <Button variant="white" size="lg">
               Start Your Free Trial

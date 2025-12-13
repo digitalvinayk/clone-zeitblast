@@ -163,7 +163,7 @@ const featureDetails: FeatureDetail[] = [
   {
     icon: FiRefreshCw,
     title: 'Webhooks & API',
-    description: 'Integrate Zeitblast with your existing tools and workflows using our robust API and webhook system.',
+    description: 'Integrate Intello Blast with your existing tools and workflows using our robust API and webhook system.',
     benefits: [
       'RESTful API',
       'Real-time webhooks',
@@ -264,7 +264,7 @@ export default function FeaturesPage() {
               Ready to Transform Your Lead Generation?
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Join thousands of real estate professionals who are closing more deals with Zeitblast
+              Join thousands of real estate professionals who are closing more deals with Intello Blast
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="white" size="lg">
