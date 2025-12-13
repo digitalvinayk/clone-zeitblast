@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Button, Container } from '@/components/ui';
+import Logo from '@/components/ui/Logo';
 import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
 import clsx from 'clsx';
 
@@ -71,11 +72,7 @@ const Header: React.FC = () => {
       <Container>
         <nav className="flex items-center justify-between py-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <div className="text-2xl font-bold text-primary-dark">
-              <span className="text-primary-green">Zeit</span>blast
-            </div>
-          </Link>
+          <Logo size="md" />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">

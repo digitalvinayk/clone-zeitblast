@@ -1,20 +1,39 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button, Container, Input } from '@/components/ui';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 const Hero: React.FC = () => {
+  const router = useRouter();
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Demo requested for:', email);
-    // Handle demo request
+    setLoading(true);
+
+    try {
+      // Store email in session storage for signup page
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('signup_email', email);
+      }
+
+      toast.success('Great! Let\'s get you started');
+
+      // Redirect to signup page
+      router.push('/auth/signup');
+    } catch (error) {
+      toast.error('Something went wrong');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-primary-green via-primary-blue to-primary-dark text-white py-20 md:py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-brand-teal via-brand-emerald to-brand-blue text-white py-20 md:py-32 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -23,25 +42,41 @@ const Hero: React.FC = () => {
         }} />
       </div>
 
+      {/* Animated Gradient Orbs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+      <div className="absolute top-40 right-10 w-72 h-72 bg-brand-cyan rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-brand-orange rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-block bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20"
+          >
+            <span className="text-sm font-semibold">🚀 Trusted by 5,000+ Growing Businesses</span>
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
           >
-            Real Estate SMS Marketing That{' '}
-            <span className="text-yellow-300">Converts</span>
+            Intelligent SMS Marketing That{' '}
+            <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+              Drives Growth
+            </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-8 text-gray-100"
+            className="text-xl md:text-2xl mb-8 text-gray-100 leading-relaxed"
           >
-            Generate more leads and close more deals with automated SMS campaigns built for real estate professionals
+            Scale your business with AI-powered SMS campaigns. Automated workflows, intelligent targeting, and real-time analytics that actually work.
           </motion.p>
 
           <motion.div
@@ -59,8 +94,8 @@ const Hero: React.FC = () => {
                 className="bg-white text-gray-900 min-w-[300px]"
                 required
               />
-              <Button type="submit" variant="white" size="lg">
-                Request Demo
+              <Button type="submit" variant="white" size="lg" disabled={loading}>
+                {loading ? 'Loading...' : 'Start Free Trial →'}
               </Button>
             </form>
           </motion.div>
@@ -73,10 +108,10 @@ const Hero: React.FC = () => {
             className="flex flex-wrap justify-center gap-8 text-sm"
           >
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              <svg className="w-5 h-5 text-accent-green" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <span>99.9% Deliverability Rate</span>
+              <span>99.9% Deliverability</span>
             </div>
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

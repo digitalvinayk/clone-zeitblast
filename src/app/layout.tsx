@@ -4,13 +4,13 @@ import { Header, Footer } from "@/components/layout";
 import { Providers } from "@/components/providers/Providers";
 
 export const metadata: Metadata = {
-  title: "Zeitblast - Real Estate SMS Marketing Platform",
-  description: "Generate more leads and close more deals with automated SMS campaigns built for real estate professionals. High deliverability, compliance built-in, and powerful automation.",
-  keywords: ["SMS marketing", "real estate", "lead generation", "text message marketing", "real estate wholesaling", "drip campaigns"],
-  authors: [{ name: "Zeitblast" }],
+  title: "Intello Blast - Intelligent SMS Marketing for Growth",
+  description: "Scale your business with intelligent SMS campaigns. AI-powered targeting, automated workflows, and real-time analytics. Built for businesses that want to grow smarter.",
+  keywords: ["SMS marketing", "intelligent marketing", "automated SMS", "business growth", "lead generation", "text message marketing", "marketing automation", "customer engagement"],
+  authors: [{ name: "Intello Blast" }],
   openGraph: {
-    title: "Zeitblast - Real Estate SMS Marketing Platform",
-    description: "Generate more leads and close more deals with automated SMS campaigns built for real estate professionals.",
+    title: "Intello Blast - Intelligent SMS Marketing for Growth",
+    description: "Scale your business with intelligent SMS campaigns. AI-powered targeting, automated workflows, and real-time analytics.",
     type: "website",
   },
 };

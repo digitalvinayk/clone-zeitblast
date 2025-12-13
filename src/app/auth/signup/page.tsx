@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Container, Button, Input, Card } from '@/components/ui';
+import Logo from '@/components/ui/Logo';
 import toast from 'react-hot-toast';
 
 export default function SignUpPage() {
@@ -73,16 +74,14 @@ export default function SignUpPage() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
       <Container size="sm">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-block mb-6">
-            <div className="text-3xl font-bold text-primary-dark">
-              <span className="text-primary-green">Zeit</span>blast
-            </div>
-          </Link>
-          <h1 className="text-3xl font-bold text-primary-dark mb-2">
-            Create Your Account
+          <div className="flex justify-center mb-6">
+            <Logo size="lg" />
+          </div>
+          <h1 className="text-3xl font-bold text-brand-blue mb-2">
+            Start Your Growth Journey
           </h1>
           <p className="text-gray-600">
-            Start generating leads with SMS marketing
+            Join thousands of businesses scaling with intelligent SMS marketing
           </p>
         </div>
 
@@ -143,9 +142,12 @@ export default function SignUpPage() {
               fullWidth
             />
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <p className="text-sm text-blue-800">
-                <strong>14-day free trial</strong> - No credit card required
+            <div className="bg-gradient-to-r from-brand-teal/10 via-brand-emerald/10 to-brand-blue/10 border-2 border-brand-teal/30 rounded-lg p-4">
+              <p className="text-sm text-brand-blue font-semibold">
+                🚀 <strong>14-day free trial</strong> - No credit card required
+              </p>
+              <p className="text-xs text-gray-600 mt-1">
+                Start growing immediately with full platform access
               </p>
             </div>
 
@@ -165,7 +167,7 @@ export default function SignUpPage() {
               Already have an account?{' '}
               <Link
                 href="/auth/signin"
-                className="text-primary-green hover:text-primary-blue font-semibold transition-colors"
+                className="text-brand-teal hover:text-brand-blue font-semibold transition-colors"
               >
                 Sign in
               </Link>
@@ -175,11 +177,11 @@ export default function SignUpPage() {
 
         <p className="text-center text-sm text-gray-500 mt-6">
           By creating an account, you agree to our{' '}
-          <Link href="/terms" className="text-primary-green hover:underline">
+          <Link href="/terms" className="text-brand-teal hover:underline">
             Terms of Service
           </Link>{' '}
           and{' '}
-          <Link href="/privacy" className="text-primary-green hover:underline">
+          <Link href="/privacy" className="text-brand-teal hover:underline">
             Privacy Policy
           </Link>
         </p>

@@ -5,6 +5,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Container, Button, Input, Card } from '@/components/ui';
+import Logo from '@/components/ui/Logo';
 import toast from 'react-hot-toast';
 
 export default function SignInPage() {
@@ -50,16 +51,14 @@ export default function SignInPage() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
       <Container size="sm">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-block mb-6">
-            <div className="text-3xl font-bold text-primary-dark">
-              <span className="text-primary-green">Zeit</span>blast
-            </div>
-          </Link>
-          <h1 className="text-3xl font-bold text-primary-dark mb-2">
+          <div className="flex justify-center mb-6">
+            <Logo size="lg" />
+          </div>
+          <h1 className="text-3xl font-bold text-brand-blue mb-2">
             Welcome Back
           </h1>
           <p className="text-gray-600">
-            Sign in to your account to continue
+            Continue your growth journey with Intello Blast
           </p>
         </div>
 

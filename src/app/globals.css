@@ -6,12 +6,27 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-  --primary-dark: #012635;
-  --primary-green: #06AB78;
-  --primary-blue: #2022AE;
-  --gradient-start: #06AB78;
-  --gradient-end: #012635;
+  --foreground: #0F172A;
+
+  /* Intello Blast Growth Colors */
+  --brand-blue: #1E40AF;
+  --brand-teal: #0D9488;
+  --brand-emerald: #059669;
+  --brand-cyan: #0891B2;
+  --brand-purple: #7C3AED;
+  --brand-orange: #EA580C;
+  --accent-blue: #3B82F6;
+  --accent-green: #10B981;
+
+  /* Gradients for growth theme */
+  --gradient-start: #0D9488;
+  --gradient-end: #1E40AF;
+  --gradient-growth: linear-gradient(135deg, #0D9488 0%, #059669 50%, #1E40AF 100%);
+
+  /* Legacy support */
+  --primary-dark: #1E40AF;
+  --primary-green: #059669;
+  --primary-blue: #0891B2;
 }
 
 body {
@@ -28,4 +43,29 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Animations for hero section */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }

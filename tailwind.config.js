@@ -9,10 +9,20 @@ module.exports = {
     extend: {
       colors: {
         background: '#ffffff',
-        foreground: '#171717',
-        'primary-dark': '#012635',
-        'primary-green': '#06AB78',
-        'primary-blue': '#2022AE',
+        foreground: '#0F172A',
+        // Growth-focused color palette
+        'brand-blue': '#1E40AF',      // Deep professional blue
+        'brand-teal': '#0D9488',      // Growth teal
+        'brand-emerald': '#059669',   // Success green
+        'brand-cyan': '#0891B2',      // Fresh cyan
+        'brand-purple': '#7C3AED',    // Innovation purple
+        'brand-orange': '#EA580C',    // Energy orange
+        'accent-blue': '#3B82F6',     // Bright blue
+        'accent-green': '#10B981',    // Bright green
+        // Legacy support (will be replaced)
+        'primary-dark': '#1E40AF',
+        'primary-green': '#059669',
+        'primary-blue': '#0891B2',
       },
       fontFamily: {
         sans: ['Roboto', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
