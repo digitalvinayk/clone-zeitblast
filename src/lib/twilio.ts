@@ -100,7 +100,7 @@ export async function purchasePhoneNumber(areaCode?: string): Promise<{
   try {
     // Search for available numbers
     const numbers = await twilioClient.availablePhoneNumbers('US').local.list({
-      areaCode: areaCode,
+      areaCode: areaCode ? parseInt(areaCode, 10) : undefined,
       limit: 1,
     });
 

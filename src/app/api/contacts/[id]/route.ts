@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma';
 // GET /api/contacts/[id] - Get single contact
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -15,9 +15,11 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
+
     const contact = await prisma.contact.findFirst({
       where: {
-        id: params.id,
+        id,
         organizationId: session.user.organizationId,
       },
       include: {
@@ -53,7 +55,7 @@ export async function GET(
 // PUT /api/contacts/[id] - Update contact
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -62,13 +64,14 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     const body = await request.json();
     const { firstName, lastName, primaryPhone, emails, mailingAddress, tags, status, assignedToId } = body;
 
     // Verify contact belongs to organization
     const existingContact = await prisma.contact.findFirst({
       where: {
-        id: params.id,
+        id,
         organizationId: session.user.organizationId,
       },
     });
@@ -78,14 +81,14 @@ export async function PUT(
     }
 
     const contact = await prisma.contact.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         firstName,
         lastName,
         primaryPhone,
-        emails: emails ? JSON.stringify(emails) : null,
-        mailingAddress: mailingAddress ? JSON.stringify(mailingAddress) : null,
-        tags: tags ? JSON.stringify(tags) : null,
+        emails: emails ? JSON.stringify(emails) : undefined,
+        mailingAddress: mailingAddress ? JSON.stringify(mailingAddress) : undefined,
+        tags: tags ? JSON.stringify(tags) : undefined,
         status,
         assignedToId,
       },
@@ -104,7 +107,7 @@ export async function PUT(
 // DELETE /api/contacts/[id] - Delete contact
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -113,10 +116,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
+
     // Verify contact belongs to organization
     const existingContact = await prisma.contact.findFirst({
       where: {
-        id: params.id,
+        id,
         organizationId: session.user.organizationId,
       },
     });
@@ -126,7 +131,7 @@ export async function DELETE(
     }
 
     await prisma.contact.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ success: true });

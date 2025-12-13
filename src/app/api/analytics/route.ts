@@ -35,7 +35,7 @@ export async function GET(request: Request) {
       _count: true,
     });
 
-    const contactsByStatusMap = contactsByStatus.reduce((acc, item) => {
+    const contactsByStatusMap = contactsByStatus.reduce((acc: { [key: string]: number }, item: any) => {
       acc[item.status] = item._count;
       return acc;
     }, {} as { [key: string]: number });
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
       _count: true,
     });
 
-    const messagesByStatusMap = messagesByStatus.reduce((acc, item) => {
+    const messagesByStatusMap = messagesByStatus.reduce((acc: { [key: string]: number }, item: any) => {
       acc[item.status] = item._count;
       return acc;
     }, {} as { [key: string]: number });
