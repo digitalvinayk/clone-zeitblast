@@ -1,4 +1,4 @@
-// Zeitblast SMS Marketing Platform - Database Schema
+// Intello Blast SMS Marketing Platform - Database Schema
 
 generator client {
   provider = "prisma-client-js"
@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -47,12 +47,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? 
-  access_token      String? 
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? 
+  id_token          String? @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -288,7 +288,7 @@ model Campaign {
   type            CampaignType
   status          CampaignStatus @default(DRAFT)
 
-  messageTemplate String   
+  messageTemplate String   @db.Text
   settings        Json?
 
   scheduledAt     DateTime?
@@ -333,7 +333,7 @@ model CampaignStep {
   delayDays       Int      @default(0)
   delayHours      Int      @default(0)
 
-  messageTemplate String   
+  messageTemplate String   @db.Text
   conditions      Json?
 
   createdAt DateTime @default(now())
@@ -396,7 +396,7 @@ model Message {
 
   toNumber        String
   direction       MessageDirection
-  content         String   
+  content         String   @db.Text
 
   status          MessageStatus @default(QUEUED)
   provider        SmsProvider?
@@ -453,7 +453,7 @@ model Conversation {
   assignedTo      User?    @relation(fields: [assignedToId], references: [id], onDelete: SetNull)
 
   lastMessageAt   DateTime?
-  lastMessagePreview String? 
+  lastMessagePreview String? @db.Text
   unreadCount     Int      @default(0)
 
   messages        Message[]
